@@ -35,6 +35,7 @@ int main() {
 
   printf("at i=0: %d\n", ll_get(list, 0));
   printf("at i=2: %d\n", ll_get(list, 2));
+  printf("at i=9: %d\n", ll_get(list, 9));
   printf("list length: %d\n", list->length);
 
   printf("removed first value: %d\n", ll_remove_first(list));
@@ -42,6 +43,7 @@ int main() {
 
   printf("at i=0: %d\n", ll_get(list, 0));
   printf("at i=2: %d\n", ll_get(list, 2));
+  printf("at i=9: %d\n", ll_get(list, 9));
   printf("list length: %d\n", list->length);
 
   ll_free(list);
