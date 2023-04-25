@@ -34,14 +34,14 @@ int main() {
   }
 
   printf("at i=0: %d\n", ll_get(list, 0));
-  printf("at i=1: %d\n", ll_get(list, 1));
+  printf("at i=2: %d\n", ll_get(list, 2));
   printf("list length: %d\n", list->length);
 
   printf("removed first value: %d\n", ll_remove_first(list));
   printf("removed first value: %d\n", ll_remove_first(list));
 
   printf("at i=0: %d\n", ll_get(list, 0));
-  printf("at i=1: %d\n", ll_get(list, 1));
+  printf("at i=2: %d\n", ll_get(list, 2));
   printf("list length: %d\n", list->length);
 
   ll_free(list);
