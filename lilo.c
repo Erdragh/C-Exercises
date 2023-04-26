@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stddef.h>
 
 typedef struct NODE node;
 
@@ -27,6 +28,8 @@ int main() {
     abort();
   }
 
+  list->start = NULL;
+  list->end = NULL;
   list->length = 0;
 
   for (int i = 0; i < 10; i++) {
@@ -49,11 +52,11 @@ int main() {
   ll_free(list);
 }
 
-void ll_free_nodes_after_including(node* node) {
-  if (node->next) {
-    ll_free_nodes_after_including(node->next);
+void ll_free_nodes_after_including(node* node_to_free) {
+  if (node_to_free->next) {
+    ll_free_nodes_after_including(node_to_free->next);
   }
-  free(node);
+  free(node_to_free);
 }
 
 void ll_free(linked_list* this) {
@@ -62,24 +65,25 @@ void ll_free(linked_list* this) {
 }
 
 void ll_add(linked_list* this, int value) {
-  node* node = malloc(sizeof(node));
-  if (!node) {
+  node* node_to_add = malloc(sizeof(node));
+  if (!node_to_add) {
     abort();
   }
-  node->data = value;
-  ll_add_node(this, node);
+  node_to_add->next = NULL;
+  node_to_add->data = value;
+  ll_add_node(this, node_to_add);
 }
 
-node* ll_add_node(linked_list* this, node* node) {
+node* ll_add_node(linked_list* this, node* node_to_add) {
   if (this->length == 0) {
-    this->start = node;
-    this->end = node;
+    this->start = node_to_add;
+    this->end = node_to_add;
   } else {
-    this->end->next = node;
-    this->end = node;
+    this->end->next = node_to_add;
+    this->end = node_to_add;
   }
   this->length++;
-  return node;
+  return node_to_add;
 }
 
 int ll_remove_first(linked_list* this) {
@@ -95,16 +99,16 @@ int ll_remove_first(linked_list* this) {
 }
 
 int ll_get(linked_list* this, int index) {
-  node* node = this->start;
+  node* node_to_get = this->start;
   for (int i = 0; i < index; i++) {
-    if (node->next) {
-      node = node->next;
+    if (node_to_get->next) {
+      node_to_get = node_to_get->next;
     } else {
       break;
     }
   }
-  if (node) {
-    return node->data;
+  if (node_to_get) {
+    return node_to_get->data;
   } else {
     return 0;
   }
