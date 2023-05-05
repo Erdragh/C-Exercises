@@ -29,4 +29,8 @@ int main() {
   for (int i = 0; i < SIZE; i++) {
     printf("%d\n", buf[i]);
   }
+  if (fflush(stdout) == EOF) {
+    perror("fflush");
+    exit(EXIT_FAILURE);
+  }
 }
